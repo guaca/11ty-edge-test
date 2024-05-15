@@ -15,29 +15,28 @@ eleventyComputed:
     og_description: "{{ article.content.SEO[0].og_description }}"
     og_image: "{{ article.content.SEO[0].og_image.filename }}"
 ---
-{% if isEdge == true %}
-{% edge %}
-<article>
-    <h1>Edge - {{ article.content.Title }}</h1>
-    <a href="/{{ article.content.Author.fullSlug }}">{{ article.content.Author.name }}</a>
-    <span> - </span>
-    <a href="/{{ article.content.Category.fullSlug }}">{{ article.content.Category.name }}</a>
-    <p>{{ article.content.PublicationDate }}</p>
-    <div>
-        {{ article.content.Body | safe }}
-    </div>
-</article>
-{% endedge %}
+{% if isEdge == "true" %}
+    {% edge %}
+        <article>
+            <h1>{{ article.content.Title }}</h1>
+            <a href="/{{ article.content.Author.fullSlug }}">{{ article.content.Author.name }}</a>
+            <span> - </span>
+            <a href="/{{ article.content.Category.fullSlug }}">{{ article.content.Category.name }}</a>
+            <p>{{ article.content.PublicationDate }}</p>
+            <div>
+                {{ article.content.Body | safe }}
+            </div>
+        </article>
+    {% endedge %}
 {% else %}
-<article>
-    <h1>{{ article.content.Title }}</h1>
-    {{ article.content.Title }}
-    <a href="/{{ article.content.Author.fullSlug }}">{{ article.content.Author.name }}</a>
-    <span> - </span>
-    <a href="/{{ article.content.Category.fullSlug }}">{{ article.content.Category.name }}</a>
-    <p>{{ article.content.PublicationDate }}</p>
-    <div>
-        {{ article.content.Body | safe }}
-    </div>
-</article>
+    <article>
+        <h1>{{ article.content.Title }}</h1>
+        <a href="/{{ article.content.Author.fullSlug }}">{{ article.content.Author.name }}</a>
+        <span> - </span>
+        <a href="/{{ article.content.Category.fullSlug }}">{{ article.content.Category.name }}</a>
+        <p>{{ article.content.PublicationDate }}</p>
+        <div>
+            {{ article.content.Body | safe }}
+        </div>
+    </article>
 {% endif %}

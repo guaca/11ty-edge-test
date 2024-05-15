@@ -14,21 +14,42 @@ eleventyComputed:
     og_description: "{{ category.content.SEO[0].og_description }}"
     og_image: "{{ category.content.SEO[0].og_image.filename }}"
 ---
-<div>
-    <h1>{{ category.content.Category }}</h1>
-
-    {% set targetCategoryFullSlug = category.full_slug %}
-    {% set filteredArticles = articles | filterArticlesByCategory(targetCategoryFullSlug) %}
-    <ul>
-        {% for article in filteredArticles %}
-            <li>
-                <article>
-                    <h3><a href="/{{ article.full_slug }}">{{ article.content.Title }}</a></h3>
-                    <span>Publication Date: {{ article.content.PublicationDate }}</span>
-                </article>
-            </li>
-        {% else %}
-            <p>No articles found for the author with Full Slug "{{ targetAuthorFullSlug }}".</p>
-        {% endfor %}
-    </ul>
-</div>
+{% if isEdge == "true" %}
+    {% edge %}
+        <div>
+            <h1>Articles about {{ category.content.Category }}</h1>
+            {% set targetCategoryFullSlug = category.full_slug %}
+            {% set filteredArticles = articles | filterArticlesByCategory(targetCategoryFullSlug) %}
+            <ul>
+                {% for article in filteredArticles %}
+                    <li>
+                        <article>
+                            <h3><a href="/{{ article.full_slug }}">{{ article.content.Title }}</a></h3>
+                            <span>Publication Date: {{ article.content.PublicationDate }}</span>
+                        </article>
+                    </li>
+                {% else %}
+                    <p>No articles found for this category."</p>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endedge %}
+{% else %}
+    <div>
+        <h1>Articles about {{ category.content.Category }}</h1>
+        {% set targetCategoryFullSlug = category.full_slug %}
+        {% set filteredArticles = articles | filterArticlesByCategory(targetCategoryFullSlug) %}
+        <ul>
+            {% for article in filteredArticles %}
+                <li>
+                    <article>
+                        <h3><a href="/{{ article.full_slug }}">{{ article.content.Title }}</a></h3>
+                        <span>Publication Date: {{ article.content.PublicationDate }}</span>
+                    </article>
+                </li>
+            {% else %}
+                <p>No articles found for this category."</p>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
