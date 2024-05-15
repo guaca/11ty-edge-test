@@ -1,0 +1,27 @@
+---
+permalink: "/authors/"
+layout: layouts/base.njk
+title: "Authors"
+description: "This is the list of Authors"
+---
+{% if isEdge == "true" %}
+{% edge %}
+<div>
+    <h1>Edge Authors</h1>
+    <ul>
+        {% for author in authors %}
+        <li><a href="/{{ author.full_slug }}">{{ author.content.Name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endedge %}
+{% else %}
+<div>
+    <h1>Authors</h1>
+    <ul>
+        {% for author in authors | sortAuthorsByName %}
+        <li><a href="/{{ author.full_slug }}">{{ author.content.Name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -1,0 +1,27 @@
+---
+permalink: "/articles/"
+layout: layouts/base.njk
+title: "Articles"
+description: "This is the list of Articles"
+---
+{% if isEdge == "true" %}
+{% edge %}
+<div>
+    <h1>Edge Articles</h1>
+    <ul>
+        {% for article in articles %}
+        <li><a href="/{{ article.full_slug }}">{{ article.content.Title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endedge %}
+{% else %}
+<div>
+    <h1>Articles</h1>
+    <ul>
+        {% for article in articles %}
+        <li><a href="/{{ article.full_slug }}">{{ article.content.Title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

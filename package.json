@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "dotenv": "^16.4.1"
+  },
+  "dependencies": {
+    "netlify-cli": "^17.23.3"
+  }
+}
